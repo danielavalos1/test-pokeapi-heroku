@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
-import "./globals.css";
 import { NextFont } from "next/dist/compiled/@next/font";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const outfit: NextFont = Outfit({
   subsets: ["latin", "latin-ext"],
@@ -9,8 +10,8 @@ const outfit: NextFont = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Poke App",
-  description: "Poke App de prueba para Heroku",
+  title: "Detalle del pokemon",
+  description: "Detalle del pokemon de prueba para Heroku",
 };
 
 export default function RootLayout({
@@ -24,7 +25,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${outfit.className} antialiased`}
       >
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
       </body>
     </html>
   );
